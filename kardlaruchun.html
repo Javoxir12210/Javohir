@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java M - Arxitektura va Qurilish</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        /* Header */
+        .header {
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #007bff;
+            transition: all 0.3s ease;
+        }
+
+        .logo h1:hover {
+            color: #0056b3;
+            transform: scale(1.02);
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 12px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        .navbar a.active {
+            color: #007bff;
+        }
+
+        .navbar a.active::after {
+            width: 100%;
+        }
+
+        .language-switcher a {
+            text-decoration: none;
+            color: #777;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .language-switcher a.active {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1557683311-eac922347aa1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center/cover;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.3s;
+            animation-fill-mode: both;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        /* Drawings Section */
+        .drawings {
+            padding: 60px 0;
+            text-align: center;
+            background: #fff;
+        }
+
+        .drawings h2 {
+            font-size: 36px;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 40px;
+            color: #222;
+        }
+
+        .drawing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .drawing-item {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            cursor: pointer;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .drawing-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .drawing-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .drawing-item h3 {
+            padding: 20px;
+            font-size: 20px;
+            font-family: 'Montserrat', sans-serif;
+            color: #222;
+        }
+
+        .drawing-item p {
+            padding: 0 20px 20px;
+            font-size: 14px;
+            color: #666;
+            flex-grow: 1;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 60px 0;
+            background: #fff;
+            text-align: center;
+        }
+
+        .gallery h2 {
+            font-size: 36px;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 40px;
+            color: #222;
+        }
+
+        .swiper-container {
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .swiper-slide img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 900px;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 30px auto;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-poster {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .modal-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #007bff;
+        }
+
+        .modal-details {
+            flex: 2;
+            padding: 20px;
+            min-width: 300px;
+        }
+
+        .modal-details h3 {
+            font-size: 28px;
+            font-family: 'Montserrat', sans-serif;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        .modal-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .modal-meta span {
+            background-color: #e6f0ff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+        }
+
+        .modal-details p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .modal-details .details {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .modal-details .details span {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .modal-btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            transition: background 0.3s;
+            margin-right: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modal-btn:hover {
+            background: #0056b3;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #007bff;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 30px 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .footer p {
+            font-size: 16px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .navbar {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: #fff;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+                z-index: 999;
+            }
+
+            .navbar.active {
+                left: 0;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .navbar a {
+                display: block;
+                padding: 12px 15px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .navbar a::after {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .modal-content {
+                flex-direction: column;
+                max-width: 90%;
+                padding: 20px;
+                margin: 15px;
+            }
+
+            .modal-poster img {
+                height: 400px;
+            }
+
+            .modal-details h3 {
+                font-size: 22px;
+            }
+
+            .modal-details p {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-details h3 {
+                font-size: 18px;
+            }
+
+            .modal-meta {
+                gap: 10px;
+                font-size: 12px;
+            }
+
+            .modal-btn {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Java M</h1>
+            </div>
+            <div class="menu-toggle" id="menuToggle">☰</div>
+            <nav class="navbar" id="navbar">
+                <ul>
+                    <li><a href="#home" class="active">Bosh sahifa</a></li>
+                    <li><a href="#projects">Loyihalar</a></li>
+                    <li><a href="#drawings">Chizmalar</a></li>
+                    <li><a href="#contacts">Kontaktlar</a></li>
+                    <li><a href="/index.html">Orqaga</a></li>
+                </ul>
+            </nav>
+            <div class="language-switcher">
+                <a href="#" class="active">Uz</a>
+                <a href="#">Ru</a>
+                <a href="#">En</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>Java M: Kelajak arxitekturasini yaratamiz</h1>
+                <p>Sizning qulayligingiz uchun innovatsion arxitektura yechimlari</p>
+                <a href="#projects" class="btn">Bizning ishlar</a>
+            </div>
+        </section>
+
+        <section class="drawings" id="drawings">
+            <div class="container">
+                <h2>Bizning chizmalar</h2>
+                <div class="drawing-grid" id="drawing-grid">
+                    <!-- Dinamik ravishda yuklanadigan chizmalar -->
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery" id="projects">
+            <div class="container">
+                <h2>Loyihalar galereyasi</h2>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" data-title="Loyiha 1" data-description="Bu zamonaviy turar joy majmuasi bo'lib, unda eng so'nggi arxitektura yechimlari qo'llanilgan. Batafsil ma'lumot uchun biz bilan bog'laning!">
+                            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Loyiha 1">
+                        </div>
+                        <div class="swiper-slide" data-title="Loyiha 2" data-description="Bu biznes markazi loyihasi bo'lib, funksional va estetik jihatdan mukammal. Batafsil ma'lumot uchun biz bilan bog'laning!">
+                            <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Loyiha 2">
+                        </div>
+                        <div class="swiper-slide" data-title="Loyiha 3" data-description="Bu savdo majmuasi loyihasi bo'lib, zamonaviy dizayn va qulaylikni birlashtiradi. Batafsil ma'lumot uchun biz bilan bog'laning!">
+                            <img src="https://les-kon.ru/upload/resize_cache/webp/iblock/a50/a50b1e4fb942d32f1b1391b8b04a617c.webp" alt="Loyiha 3">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="contacts">
+        <div class="container">
+            <p>© 2025 <strong>Java M</strong>. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const navbar = document.getElementById('navbar');
+
+            menuToggle.addEventListener('click', () => {
+                navbar.classList.toggle('active');
+            });
+
+            // Close mobile menu on link click
+            document.querySelectorAll('.navbar a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        navbar.classList.remove('active');
+                    }
+                });
+            });
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelector(anchor.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Active link highlighting on scroll
+            window.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.navbar a');
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // Swiper setup
+            new Swiper('.swiper-container', {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                },
+            });
+
+            // Drawings data
+            const drawingsData = [
+                {
+                    title: 'Yangi avlod turar joy majmuasi',
+                    imageUrl: 'https://dom-stroy.kiev.ua/wp-content/uploads/2022/06/a318fe323dc421011e737cd97ab6aa69-1024x662.jpg',
+                    year: 2023,
+                    type: 'Turar joy',
+                    duration: '18 oy',
+                    rating: '4.8/5',
+                    description: 'Bu yangi avlod turar joy majmuasi loyihasi bo\'lib, zamonaviy arxitektura va qulaylikni birlashtiradi. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
+                    architect: 'Jamshid Mirzayev',
+                    team: 'Java M Arxitektura'
+                },
+                {
+                    title: 'Poytaxt biznes markazi',
+                    imageUrl: 'https://i.pinimg.com/474x/9f/d7/ce/9fd7ce73d5cd2679252616d5af4769cf.jpg',
+                    year: 2024,
+                    type: 'Biznes markazi',
+                    duration: '24 oy',
+                    rating: '4.9/5',
+                    description: 'Bu poytaxt biznes markazi loyihasi bo\'lib, funksional va estetik jihatdan mukammal. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
+                    architect: 'Alisher Usmonov',
+                    team: 'Java M Dizayn'
+                },
+                {
+                    title: 'Samarqand savdo majmuasi',
+                    imageUrl: 'https://trade-help.com/upload/tradetechnology/efplan/tp1.jpg',
+                    year: 2022,
+                    type: 'Savdo majmuasi',
+                    duration: '15 oy',
+                    rating: '4.7/5',
+                    description: 'Bu Samarqand savdo majmuasi loyihasi bo\'lib, zamonaviy dizayn va qulaylikni birlashtiradi. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
+                    architect: 'Nodira Xasanova',
+                    team: 'Java M Qurilish'
+                },
+                {
+                    title: 'Toshkent ofis binosi',
+                    imageUrl: 'https://dom-stroy.kiev.ua/wp-content/uploads/2022/06/a318fe323dc421011e737cd97ab6aa69-1024x662.jpg',
+                    year: 2025,
+                    type: 'Ofis binosi',
+                    duration: '20 oy',
+                    rating: '4.6/5',
+                    description: 'Bu Toshkent ofis binosi loyihasi bo\'lib, eng so\'nggi texnologiyalar qo\'llanilgan. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
+                    architect: 'Sardor Rahimov',
+                    team: 'Java M Innovatsiya'
+                },
+                {
+                    title: 'Farg\'ona ko\'p qavatli uyi',
+                    imageUrl: 'https://i.pinimg.com/736x/df/4e/4b/df4e4b38a26fa205c9c028922f4dbc89.jpg',
+                    year: 2021,
+                    type: 'Ko\'p qavatli uy',
+                    duration: '12 oy',
+                    rating: '4.5/5',
+                    description: 'Bu Farg\'ona ko\'p qavatli uyi loyihasi bo\'lib, qulay va zamonaviy yashash muhitini ta\'minlaydi. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
+                    architect: 'Dilshod Karimov',
+                    team: 'Java M Arxitektura'
+                }
+            ];
+
+            // Load drawings
+            async function fetchDrawings() {
+                try {
+                    const drawingGrid = document.getElementById('drawing-grid');
+                    drawingGrid.innerHTML = drawingsData.map((drawing, index) => `
+                        <div class="drawing-item" onclick="showDetails(${index})">
+                            <img src="${drawing.imageUrl}" alt="${drawing.title}">
+                            <h3>${drawing.title}</h3>
+                            <p>Bu ${drawing.title.toLowerCase()} loyihasi haqida qisqacha ma'lumot.</p>
+                        </div>
+                    `).join('');
+                } catch (error) {
+                    console.error('Chizmalarni yuklashda xatolik:', error);
+                }
+            }
+
+            // Show modal
+            function showDetails(index) {
+                const drawing = drawingsData[index];
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="this.parentElement.parentElement.remove()">×</span>
+                        <div class="modal-poster">
+                            <img src="${drawing.imageUrl}" alt="${drawing.title}">
+                        </div>
+                        <div class="modal-details">
+                            <h3>${drawing.title}</h3>
+                            <div class="modal-meta">
+                                <span>${drawing.year}</span>
+                                <span>${drawing.type}</span>
+                                <span>Davomiylik: ${drawing.duration}</span>
+                                <span>Reyting: ${drawing.rating}</span>
+                            </div>
+                            <p>${drawing.description}</p>
+                            <p class="details">
+                                <span>Arxitektor:</span> ${drawing.architect}<br>
+                                <span>Jamoa:</span> ${drawing.team}
+                            </p>
+                            <a href="#contacts" class="modal-btn">Batafsil ma'lumot uchun</a>
+                            <button class="modal-btn" onclick="this.parentElement.parentElement.parentElement.remove()">Yopish</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                modal.style.display = 'flex';
+            }
+
+            // Swiper slides click event
+            document.querySelectorAll('.swiper-slide').forEach(slide => {
+                slide.addEventListener('click', () => {
+                    const title = slide.getAttribute('data-title');
+                    const description = slide.getAttribute('data-description');
+                    const imageUrl = slide.querySelector('img').src;
+                    const modal = document.createElement('div');
+                    modal.className = 'modal';
+                    modal.innerHTML = `
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="this.parentElement.parentElement.remove()">×</span>
+                            <div class="modal-poster">
+                                <img src="${imageUrl}" alt="${title}">
+                            </div>
+                            <div class="modal-details">
+                                <h3>${title}</h3>
+                                <p>${description}</p>
+                                <a href="#contacts" class="modal-btn">Batafsil ma'lumot uchun</a>
+                                <button class="modal-btn" onclick="this.parentElement.parentElement.parentElement.remove()">Yopish</button>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+                    modal.style.display = 'flex';
+                });
+            });
+
+            fetchDrawings();
+        });
+    </script>
+</body>
+</html>
