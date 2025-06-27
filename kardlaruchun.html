@@ -3,256 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java M - Arxitektura va Qurilish</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <meta name="description" content="Java M - innovatsion arxitektura va qurilish chizmalari, zamonaviy loyihalar va sifatli yechimlar">
+    <title>Java M - Arxitektura va Qurilish Chizmalar</title>
+    
+    <!-- Preload resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#007BFF',
+                        secondary: '#6C757D',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@10/swiper-bundle.min.css" />
+    
+    <!-- Custom CSS -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .gradient-bg {
+            background: linear-gradient(135deg, #007BFF 0%, #00BFFF 100%);
         }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
+        
+        .drawing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.2);
         }
-
-        .container {
-            width: 90%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 0;
-        }
-
-        /* Header */
-        .header {
-            background: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 24px;
-            color: #007bff;
-            transition: all 0.3s ease;
-        }
-
-        .logo h1:hover {
-            color: #0056b3;
-            transform: scale(1.02);
-        }
-
-        .navbar ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        .navbar a {
-            text-decoration: none;
-            color: #333;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 16px;
-            padding: 8px 12px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .navbar a:hover {
-            color: #007bff;
-        }
-
-        .navbar a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #007bff;
-            transition: width 0.3s ease;
-        }
-
-        .navbar a:hover::after {
-            width: 100%;
-        }
-
-        .navbar a.active {
-            color: #007bff;
-        }
-
-        .navbar a.active::after {
-            width: 100%;
-        }
-
-        .language-switcher a {
-            text-decoration: none;
-            color: #777;
-            font-size: 14px;
-            margin-left: 10px;
-        }
-
-        .language-switcher a.active {
-            color: #007bff;
-            font-weight: bold;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: #333;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1557683311-eac922347aa1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center/cover;
-            color: white;
-            text-align: center;
-            padding: 150px 0;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            font-family: 'Montserrat', sans-serif;
-            margin-bottom: 20px;
-            animation: fadeInDown 1s ease;
-        }
-
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease 0.3s;
-            animation-fill-mode: both;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #007bff;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-family: 'Montserrat', sans-serif;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .btn:hover {
-            background: #0056b3;
-            transform: translateY(-3px);
-        }
-
-        /* Drawings Section */
-        .drawings {
-            padding: 60px 0;
-            text-align: center;
-            background: #fff;
-        }
-
-        .drawings h2 {
-            font-size: 36px;
-            font-family: 'Montserrat', sans-serif;
-            margin-bottom: 40px;
-            color: #222;
-        }
-
-        .drawing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .drawing-item {
-            background: #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: left;
-            cursor: pointer;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .drawing-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .drawing-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-bottom: 2px solid #007bff;
-        }
-
-        .drawing-item h3 {
-            padding: 20px;
-            font-size: 20px;
-            font-family: 'Montserrat', sans-serif;
-            color: #222;
-        }
-
-        .drawing-item p {
-            padding: 0 20px 20px;
-            font-size: 14px;
-            color: #666;
-            flex-grow: 1;
-        }
-
-        /* Gallery Section */
-        .gallery {
-            padding: 60px 0;
-            background: #fff;
-            text-align: center;
-        }
-
-        .gallery h2 {
-            font-size: 36px;
-            font-family: 'Montserrat', sans-serif;
-            margin-bottom: 40px;
-            color: #222;
-        }
-
-        .swiper-container {
-            width: 100%;
-            padding: 20px 0;
-        }
-
-        .swiper-slide img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            transition: transform 0.3s;
-        }
-
+        
         .swiper-slide img:hover {
             transform: scale(1.05);
         }
-
-        /* Modal */
+        
         .modal {
             display: none;
             justify-content: center;
@@ -264,530 +61,577 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
             z-index: 1000;
-            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-
+        
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        
         .modal-content {
             background: white;
             padding: 30px;
             border-radius: 15px;
             max-width: 900px;
             position: relative;
-            animation: fadeIn 0.3s ease;
-            display: flex;
-            flex-wrap: wrap;
-            margin: 30px auto;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-50px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
-
-        .modal-poster {
-            flex: 1;
-            min-width: 300px;
+        
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
         }
-
-        .modal-poster img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid #007bff;
-        }
-
-        .modal-details {
-            flex: 2;
-            padding: 20px;
-            min-width: 300px;
-        }
-
-        .modal-details h3 {
-            font-size: 28px;
-            font-family: 'Montserrat', sans-serif;
-            color: #222;
-            margin-bottom: 15px;
-        }
-
-        .modal-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .modal-meta span {
-            background-color: #e6f0ff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: 1px solid #007bff;
-        }
-
-        .modal-details p {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .modal-details .details {
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        .modal-details .details span {
-            font-weight: bold;
-            color: #007bff;
-        }
-
-        .modal-btn {
-            display: inline-block;
-            background: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-family: 'Montserrat', sans-serif;
-            transition: background 0.3s;
-            margin-right: 10px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .modal-btn:hover {
-            background: #0056b3;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 30px;
-            cursor: pointer;
-            color: #333;
-            transition: color 0.3s;
-        }
-
-        .close-btn:hover {
-            color: #007bff;
-        }
-
-        /* Footer */
-        .footer {
-            background: #1a1a1a;
-            color: #fff;
-            text-align: center;
-            padding: 30px 0;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .footer p {
-            font-size: 16px;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Responsive Design */
+        
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            .navbar {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 80%;
-                height: calc(100vh - 70px);
-                background: #fff;
-                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-                transition: all 0.3s ease;
-                z-index: 999;
-            }
-
-            .navbar.active {
-                left: 0;
-            }
-
-            .navbar ul {
-                flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-            }
-
-            .navbar a {
-                display: block;
-                padding: 12px 15px;
-                border-bottom: 1px solid #f0f0f0;
-            }
-
-            .navbar a::after {
+            .mobile-menu {
                 display: none;
             }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .modal-content {
-                flex-direction: column;
-                max-width: 90%;
-                padding: 20px;
-                margin: 15px;
-            }
-
-            .modal-poster img {
-                height: 400px;
-            }
-
-            .modal-details h3 {
-                font-size: 22px;
-            }
-
-            .modal-details p {
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .modal-details h3 {
-                font-size: 18px;
-            }
-
-            .modal-meta {
-                gap: 10px;
-                font-size: 12px;
-            }
-
-            .modal-btn {
-                font-size: 14px;
-                padding: 8px 15px;
-            }
-
-            .hero h1 {
-                font-size: 28px;
+            .mobile-menu.active {
+                display: block;
             }
         }
     </style>
 </head>
-<body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <h1>Java M</h1>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold flex items-center">
+                <span class="bg-white text-blue-700 px-2 py-1 rounded mr-2">Java</span>
+                <span class="text-white">M</span>
             </div>
-            <div class="menu-toggle" id="menuToggle">☰</div>
-            <nav class="navbar" id="navbar">
-                <ul>
-                    <li><a href="#home" class="active">Bosh sahifa</a></li>
-                    <li><a href="#projects">Loyihalar</a></li>
-                    <li><a href="#drawings">Chizmalar</a></li>
-                    <li><a href="#contacts">Kontaktlar</a></li>
-                    <li><a href="./index.html">Orqaga</a></li>
-                </ul>
-            </nav>
-            <div class="language-switcher">
-                <a href="#" class="active">Uz</a>
-                <a href="#">Ru</a>
-                <a href="#">En</a>
+            
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="./index.html#home" class="hover:text-blue-200 transition duration-300 py-2">Bosh sahifa</a></li>
+                <li><a href="./index.html#about" class="hover:text-blue-200 transition duration-300 py-2">Biz haqimizda</a></li>
+                <li><a href="./index.html#services" class="hover:text-blue-200 transition duration-300 py-2">Xizmatlar</a></li>
+                <li><a href="./index.html#projects" class="hover:text-blue-200 transition duration-300 py-2">Loyihalar</a></li>
+                <li><a href="./index.html#contact" class="hover:text-blue-200 transition duration-300 py-2">Aloqa</a></li>
+                <li><a href="./kardlaruchun.html" class="hover:text-blue-200 transition duration-300 py-2 text-blue-300">Chizmalar</a></li>
+            </ul>
+            
+            <!-- Mobile Menu Button -->
+            <button id="menuToggle" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden bg-blue-700">
+            <div class="container mx-auto px-4 py-2">
+                <a href="./index.html#home" class="block py-2 text-white hover:bg-blue-600 px-2 rounded">Bosh sahifa</a>
+                <a href="./index.html#about" class="block py-2 text-white hover:bg-blue-600 px-2 rounded">Biz haqimizda</a>
+                <a href="./index.html#services" class="block py-2 text-white hover:bg-blue-600 px-2 rounded">Xizmatlar</a>
+                <a href="./index.html#projects" class="block py-2 text-white hover:bg-blue-600 px-2 rounded">Loyihalar</a>
+                <a href="./index.html#contact" class="block py-2 text-white hover:bg-blue-600 px-2 rounded">Aloqa</a>
+                <a href="./kardlaruchun.html" class="block py-2 text-white hover:bg-blue-600 px-2 rounded text-blue-300">Chizmalar</a>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <section class="hero" id="home">
-            <div class="container">
-                <h1>Java M: Kelajak arxitekturasini yaratamiz</h1>
-                <p>Sizning qulayligingiz uchun innovatsion arxitektura yechimlari</p>
-                <a href="#projects" class="btn">Bizning ishlar</a>
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn absolute top-4 right-4 text-2xl cursor-pointer text-gray-600 hover:text-blue-600" onclick="closeModalFunc()">×</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Java M: <span class="border-b-4 border-white">Kelajak arxitekturasini yaratamiz</span></h1>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Sizning qulayligingiz uchun innovatsion arxitektura yechimlari va chizmalar</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#drawings" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition text-center">Chizmalar</a>
+                <a href="#projects" class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-700 transition text-center">Loyihalar</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="drawings" id="drawings">
-            <div class="container">
-                <h2>Bizning chizmalar</h2>
-                <div class="drawing-grid" id="drawing-grid">
-                    <!-- Dinamik ravishda yuklanadigan chizmalar -->
+    <!-- Drawings Section -->
+    <section id="drawings" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Bizning chizmalar</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="drawing-grid">
+                <!-- Drawings will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="projects" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Loyihalar galereyasi</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Bizning muvaffaqiyatli yakunlagan loyihalarimiz bilan tanishing</p>
+            </div>
+            
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" data-title="Loyiha 1" data-description="Bu zamonaviy turar joy majmuasi bo'lib, unda eng so'nggi arxitektura yechimlari qo'llanilgan. Batafsil ma'lumot uchun biz bilan bog'laning!">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Loyiha 1" class="w-full h-64 object-cover rounded-lg">
+                    </div>
+                    <div class="swiper-slide" data-title="Loyiha 2" data-description="Bu biznes markazi loyihasi bo'lib, funksional va estetik jihatdan mukammal. Batafsil ma'lumot uchun biz bilan bog'laning!">
+                        <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Loyiha 2" class="w-full h-64 object-cover rounded-lg">
+                    </div>
+                    <div class="swiper-slide" data-title="Loyiha 3" data-description="Bu savdo majmuasi loyihasi bo'lib, zamonaviy dizayn va qulaylikni birlashtiradi. Batafsil ma'lumot uchun biz bilan bog'laning!">
+                        <img src="https://les-kon.ru/upload/resize_cache/webp/iblock/a50/a50b1e4fb942d32f1b1391b8b04a617c.webp" alt="Loyiha 3" class="w-full h-64 object-cover rounded-lg">
+                    </div>
                 </div>
+                <div class="swiper-pagination mt-4"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="gallery" id="projects">
-            <div class="container">
-                <h2>Loyihalar galereyasi</h2>
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide" data-title="Loyiha 1" data-description="Bu zamonaviy turar joy majmuasi bo'lib, unda eng so'nggi arxitektura yechimlari qo'llanilgan. Batafsil ma'lumot uchun biz bilan bog'laning!">
-                            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Loyiha 1">
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Biz bilan bog'laning</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Loyihangiz haqida so'rov qoldiring, biz siz bilan tezroq bog'lanamiz</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2">
+                    <form class="space-y-6" id="contactForm">
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-2 font-medium">Ismingiz</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition" required>
                         </div>
-                        <div class="swiper-slide" data-title="Loyiha 2" data-description="Bu biznes markazi loyihasi bo'lib, funksional va estetik jihatdan mukammal. Batafsil ma'lumot uchun biz bilan bog'laning!">
-                            <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Loyiha 2">
+                        
+                        <div>
+                            <label for="phone" class="block text-gray-700 mb-2 font-medium">Telefon raqam</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition" required>
                         </div>
-                        <div class="swiper-slide" data-title="Loyiha 3" data-description="Bu savdo majmuasi loyihasi bo'lib, zamonaviy dizayn va qulaylikni birlashtiradi. Batafsil ma'lumot uchun biz bilan bog'laning!">
-                            <img src="https://les-kon.ru/upload/resize_cache/webp/iblock/a50/a50b1e4fb942d32f1b1391b8b04a617c.webp" alt="Loyiha 3">
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 mb-2 font-medium">Xabar</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Yuborish</button>
+                    </form>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md h-full">
+                        <h3 class="text-xl font-semibold mb-6">Kontakt ma'lumotlari</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="text-blue-600 mr-4 mt-1">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Manzil</h4>
+                                    <p class="text-gray-600">Islom Karimov 132, Toshkent</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-blue-600 mr-4 mt-1">
+                                    <i class="fas fa-phone-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Telefon</h4>
+                                    <p class="text-gray-600">+998 71 250 99 31</p>
+                                    <p class="text-gray-600">+998 90 123 45 67</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-blue-600 mr-4 mt-1">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Elektron pochta</h4>
+                                    <p class="text-gray-600">info@javam.uz</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-blue-600 mr-4 mt-1">
+                                    <i class="fas fa-clock text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Ish vaqti</h4>
+                                    <p class="text-gray-600">Dushanba-Juma: 9:00 - 18:00</p>
+                                    <p class="text-gray-600">Shanba: 9:00 - 14:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-semibold text-gray-800 mb-4">Ijtimoiy tarmoqlar</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://t.me/your_channel" class="text-blue-600 hover:text-blue-800 transition" aria-label="Telegram">
+                                    <i class="fab fa-telegram text-2xl"></i>
+                                </a>
+                                <a href="https://facebook.com/your_page" class="text-blue-600 hover:text-blue-800 transition" aria-label="Facebook">
+                                    <i class="fab fa-facebook text-2xl"></i>
+                                </a>
+                                <a href="https://instagram.com/your_page" class="text-blue-600 hover:text-blue-800 transition" aria-label="Instagram">
+                                    <i class="fab fa-instagram text-2xl"></i>
+                                </a>
+                                <a href="https://youtube.com/your_channel" class="text-blue-600 hover:text-blue-800 transition" aria-label="YouTube">
+                                    <i class="fab fa-youtube text-2xl"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer class="footer" id="contacts">
-        <div class="container">
-            <p>© 2025 <strong>Java M</strong>. Barcha huquqlar himoyalangan.</p>
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-bold flex items-center mb-4">
+                        <span class="bg-white text-blue-700 px-2 py-1 rounded mr-2">Java</span>
+                        <span class="text-white">M</span>
+                    </div>
+                    <p class="text-gray-200">Qurilishda yangi standartlar. Orzuingizdagi uyni biz bilan barpo eting.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Menyu</h3>
+                    <ul class="space-y-2">
+                        <li><a href="./index.html#home" class="text-gray-200 hover:text-white transition">Bosh sahifa</a></li>
+                        <li><a href="./index.html#about" class="text-gray-200 hover:text-white transition">Biz haqimizda</a></li>
+                        <li><a href="./index.html#services" class="text-gray-200 hover:text-white transition">Xizmatlar</a></li>
+                        <li><a href="./index.html#projects" class="text-gray-200 hover:text-white transition">Loyihalar</a></li>
+                        <li><a href="./index.html#contact" class="text-gray-200 hover:text-white transition">Aloqa</a></li>
+                        <li><a href="./kardlaruchun.html" class="text-gray-200 hover:text-white transition">Chizmalar</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Xizmatlar</h3>
+                    <ul class="space-y-2">
+                        <li><a href="./index.html#services" class="text-gray-200 hover:text-white transition">Shaxsiy uylar qurish</a></li>
+                        <li><a href="./index.html#services" class="text-gray-200 hover:text-white transition">Ish binolari</a></li>
+                        <li><a href="./index.html#services" class="text-gray-200 hover:text-white transition">Hududlarni obodonlashtirish</a></li>
+                        <li><a href="./index.html#services" class="text-gray-200 hover:text-white transition">Rekonstruksiya</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Ijtimoiy tarmoqlar</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://t.me/your_channel" class="bg-white text-blue-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition" aria-label="Telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="https://facebook.com/your_page" class="bg-white text-blue-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com/your_page" class="bg-white text-blue-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/your_channel" class="bg-white text-blue-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-blue-400 pt-6 text-center text-gray-200">
+                <p>© 2025 <strong>Java M</strong>. Barcha huquqlar himoyalangan.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
+
+    <!-- JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Mobile menu toggle
-            const menuToggle = document.getElementById('menuToggle');
-            const navbar = document.getElementById('navbar');
+        // Mobile Menu Toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
 
-            menuToggle.addEventListener('click', () => {
-                navbar.classList.toggle('active');
-            });
-
-            // Close mobile menu on link click
-            document.querySelectorAll('.navbar a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        navbar.classList.remove('active');
-                    }
-                });
-            });
-
-            // Smooth scroll
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    document.querySelector(anchor.getAttribute('href')).scrollIntoView({
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                });
-            });
-
-            // Active link highlighting on scroll
-            window.addEventListener('scroll', () => {
-                const sections = document.querySelectorAll('section');
-                const navLinks = document.querySelectorAll('.navbar a');
-                let current = '';
-
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= (sectionTop - 100)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-            // Swiper setup
-            new Swiper('.swiper-container', {
-                slidesPerView: 1,
-                spaceBetween: 20,
-                loop: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                breakpoints: {
-                    768: {
-                        slidesPerView: 2,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                    },
-                },
-            });
-
-            // Drawings data
-            const drawingsData = [
-                {
-                    title: 'Yangi avlod turar joy majmuasi',
-                    imageUrl: 'https://dom-stroy.kiev.ua/wp-content/uploads/2022/06/a318fe323dc421011e737cd97ab6aa69-1024x662.jpg',
-                    year: 2023,
-                    type: 'Turar joy',
-                    duration: '18 oy',
-                    rating: '4.8/5',
-                    description: 'Bu yangi avlod turar joy majmuasi loyihasi bo\'lib, zamonaviy arxitektura va qulaylikni birlashtiradi. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
-                    architect: 'Jamshid Mirzayev',
-                    team: 'Java M Arxitektura'
-                },
-                {
-                    title: 'Poytaxt biznes markazi',
-                    imageUrl: 'https://i.pinimg.com/474x/9f/d7/ce/9fd7ce73d5cd2679252616d5af4769cf.jpg',
-                    year: 2024,
-                    type: 'Biznes markazi',
-                    duration: '24 oy',
-                    rating: '4.9/5',
-                    description: 'Bu poytaxt biznes markazi loyihasi bo\'lib, funksional va estetik jihatdan mukammal. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
-                    architect: 'Alisher Usmonov',
-                    team: 'Java M Dizayn'
-                },
-                {
-                    title: 'Samarqand savdo majmuasi',
-                    imageUrl: 'https://trade-help.com/upload/tradetechnology/efplan/tp1.jpg',
-                    year: 2022,
-                    type: 'Savdo majmuasi',
-                    duration: '15 oy',
-                    rating: '4.7/5',
-                    description: 'Bu Samarqand savdo majmuasi loyihasi bo\'lib, zamonaviy dizayn va qulaylikni birlashtiradi. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
-                    architect: 'Nodira Xasanova',
-                    team: 'Java M Qurilish'
-                },
-                {
-                    title: 'Toshkent ofis binosi',
-                    imageUrl: 'https://dom-stroy.kiev.ua/wp-content/uploads/2022/06/a318fe323dc421011e737cd97ab6aa69-1024x662.jpg',
-                    year: 2025,
-                    type: 'Ofis binosi',
-                    duration: '20 oy',
-                    rating: '4.6/5',
-                    description: 'Bu Toshkent ofis binosi loyihasi bo\'lib, eng so\'nggi texnologiyalar qo\'llanilgan. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
-                    architect: 'Sardor Rahimov',
-                    team: 'Java M Innovatsiya'
-                },
-                {
-                    title: 'Farg\'ona ko\'p qavatli uyi',
-                    imageUrl: 'https://i.pinimg.com/736x/df/4e/4b/df4e4b38a26fa205c9c028922f4dbc89.jpg',
-                    year: 2021,
-                    type: 'Ko\'p qavatli uy',
-                    duration: '12 oy',
-                    rating: '4.5/5',
-                    description: 'Bu Farg\'ona ko\'p qavatli uyi loyihasi bo\'lib, qulay va zamonaviy yashash muhitini ta\'minlaydi. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
-                    architect: 'Dilshod Karimov',
-                    team: 'Java M Arxitektura'
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobileMenu').classList.remove('active');
                 }
-            ];
+            });
+        });
 
-            // Load drawings
-            async function fetchDrawings() {
-                try {
-                    const drawingGrid = document.getElementById('drawing-grid');
-                    drawingGrid.innerHTML = drawingsData.map((drawing, index) => `
-                        <div class="drawing-item" onclick="showDetails(${index})">
-                            <img src="${drawing.imageUrl}" alt="${drawing.title}">
-                            <h3>${drawing.title}</h3>
-                            <p>Bu ${drawing.title.toLowerCase()} loyihasi haqida qisqacha ma'lumot.</p>
-                        </div>
-                    `).join('');
-                } catch (error) {
-                    console.error('Chizmalarni yuklashda xatolik:', error);
-                }
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
             }
+        });
 
-            // Show modal
-            function showDetails(index) {
-                const drawing = drawingsData[index];
-                const modal = document.createElement('div');
-                modal.className = 'modal';
-                modal.innerHTML = `
-                    <div class="modal-content">
-                        <span class="close-btn" onclick="this.parentElement.parentElement.remove()">×</span>
-                        <div class="modal-poster">
-                            <img src="${drawing.imageUrl}" alt="${drawing.title}">
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Xabaringiz yuborildi! Tez orada siz bilan bog\'lanamiz.');
+                this.reset();
+            });
+        }
+
+        // Active Link Highlighting on Scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-300');
+                if (link.getAttribute('href').includes(`#${current}`)) {
+                    link.classList.add('text-blue-300');
+                }
+            });
+        });
+
+        // Swiper Setup
+        new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+
+        // Drawings Data
+        const drawingsData = [
+            {
+                title: 'Yangi avlod turar joy majmuasi',
+                imageUrl: 'https://dom-stroy.kiev.ua/wp-content/uploads/2022/06/a318fe323dc421011e737cd97ab6aa69-1024x662.jpg',
+                year: 2023,
+                type: 'Turar joy',
+                duration: '18 oy',
+                rating: '4.8/5',
+                description: 'Bu yangi avlod turar joy majmuasi loyihasi bo\'lib, zamonaviy arxitektura va qulaylikni birlashtiradi. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
+                architect: 'Jamshid Mirzayev',
+                team: 'Java M Arxitektura'
+            },
+            {
+                title: 'Poytaxt biznes markazi',
+                imageUrl: 'https://i.pinimg.com/474x/9f/d7/ce/9fd7ce73d5cd2679252616d5af4769cf.jpg',
+                year: 2024,
+                type: 'Biznes markazi',
+                duration: '24 oy',
+                rating: '4.9/5',
+                description: 'Bu poytaxt biznes markazi loyihasi bo\'lib, funksional va estetik jihatdan mukammal. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
+                architect: 'Alisher Usmonov',
+                team: 'Java M Dizayn'
+            },
+            {
+                title: 'Samarqand savdo majmuasi',
+                imageUrl: 'https://trade-help.com/upload/tradetechnology/efplan/tp1.jpg',
+                year: 2022,
+                type: 'Savdo majmuasi',
+                duration: '15 oy',
+                rating: '4.7/5',
+                description: 'Bu Samarqand savdo majmuasi loyihasi bo\'lib, zamonaviy dizayn va qulaylikni birlashtiradi. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
+                architect: 'Nodira Xasanova',
+                team: 'Java M Qurilish'
+            },
+            {
+                title: 'Toshkent ofis binosi',
+                imageUrl: 'https://dom-stroy.kiev.ua/wp-content/uploads/2022/06/a318fe323dc421011e737cd97ab6aa69-1024x662.jpg',
+                year: 2025,
+                type: 'Ofis binosi',
+                duration: '20 oy',
+                rating: '4.6/5',
+                description: 'Bu Toshkent ofis binosi loyihasi bo\'lib, eng so\'nggi texnologiyalar qo\'llanilgan. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
+                architect: 'Sardor Rahimov',
+                team: 'Java M Innovatsiya'
+            },
+            {
+                title: 'Farg\'ona ko\'p qavatli uyi',
+                imageUrl: 'https://i.pinimg.com/736x/df/4e/4b/df4e4b38a26fa205c9c028922f4dbc89.jpg',
+                year: 2021,
+                type: 'Ko\'p qavatli uy',
+                duration: '12 oy',
+                rating: '4.5/5',
+                description: 'Bu Farg\'ona ko\'p qavatli uyi loyihasi bo\'lib, qulay va zamonaviy yashash muhitini ta\'minlaydi. Batafsil ma\'lumot uchun biz bilan bog\'laning!',
+                architect: 'Dilshod Karimov',
+                team: 'Java M Arxitektura'
+            }
+        ];
+
+        // Load Drawings
+        function loadDrawings() {
+            try {
+                const drawingGrid = document.getElementById('drawing-grid');
+                drawingGrid.innerHTML = drawingsData.map((drawing, index) => `
+                    <div class="drawing-card bg-white rounded-lg shadow-md transition duration-300 cursor-pointer" onclick="showDetails(${index})">
+                        <img src="${drawing.imageUrl}" alt="${drawing.title}" class="w-full h-64 object-cover rounded-t-lg">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-3">${drawing.title}</h3>
+                            <p class="text-gray-600">Bu ${drawing.title.toLowerCase()} loyihasi haqida qisqacha ma'lumot.</p>
                         </div>
-                        <div class="modal-details">
-                            <h3>${drawing.title}</h3>
-                            <div class="modal-meta">
-                                <span>${drawing.year}</span>
-                                <span>${drawing.type}</span>
-                                <span>Davomiylik: ${drawing.duration}</span>
-                                <span>Reyting: ${drawing.rating}</span>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Chizmalarni yuklashda xatolik:', error);
+            }
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('modal');
+        const modalBody = document.getElementById('modalBody');
+
+        function openModal(content) {
+            modalBody.innerHTML = content;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                modal.style.display = 'flex';
+            }, 10);
+        }
+
+        function closeModalFunc() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Close modal on outside click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModalFunc();
+            }
+        });
+
+        // Show Details
+        const modalCache = {};
+        function showDetails(index) {
+            if (!modalCache[index]) {
+                const drawing = drawingsData[index];
+                const shareUrl = encodeURIComponent(window.location.href + `#drawing-${index}`);
+                const shareTitle = encodeURIComponent(drawing.title);
+                modalCache[index] = `
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/3">
+                            <img src="${drawing.imageUrl}" alt="${drawing.title}" loading="lazy" class="w-full h-full object-cover rounded-lg border-2 border-blue-600">
+                        </div>
+                        <div class="md:w-2/3">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">${drawing.title}</h3>
+                            <p class="text-gray-600 mb-4">${drawing.description}</p>
+                            <div class="mt-6 flex gap-4">
+                                <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Batafsil ma'lumot uchun</a>
+                                <button class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 transition" onclick="closeModalFunc()">Yopish</button>
+                                <a href="https://t.me/share/url?url=${shareUrl}&text=${shareTitle}" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition">Telegram'da ulashish</a>
                             </div>
-                            <p>${drawing.description}</p>
-                            <p class="details">
-                                <span>Arxitektor:</span> ${drawing.architect}<br>
-                                <span>Jamoa:</span> ${drawing.team}
-                            </p>
-                            <a href="#contacts" class="modal-btn">Batafsil ma'lumot uchun</a>
-                            <button class="modal-btn" onclick="this.parentElement.parentElement.parentElement.remove()">Yopish</button>
                         </div>
                     </div>
                 `;
-                document.body.appendChild(modal);
-                modal.style.display = 'flex';
             }
+            openModal(modalCache[index]);
+        }
 
-            // Swiper slides click event
-            document.querySelectorAll('.swiper-slide').forEach(slide => {
-                slide.addEventListener('click', () => {
-                    const title = slide.getAttribute('data-title');
-                    const description = slide.getAttribute('data-description');
-                    const imageUrl = slide.querySelector('img').src;
-                    const modal = document.createElement('div');
-                    modal.className = 'modal';
-                    modal.innerHTML = `
-                        <div class="modal-content">
-                            <span class="close-btn" onclick="this.parentElement.parentElement.remove()">×</span>
-                            <div class="modal-poster">
-                                <img src="${imageUrl}" alt="${title}">
-                            </div>
-                            <div class="modal-details">
-                                <h3>${title}</h3>
-                                <p>${description}</p>
-                                <a href="#contacts" class="modal-btn">Batafsil ma'lumot uchun</a>
-                                <button class="modal-btn" onclick="this.parentElement.parentElement.parentElement.remove()">Yopish</button>
+        // Show Modal for Swiper Slides
+        document.querySelectorAll('.swiper-slide').forEach(slide => {
+            slide.addEventListener('click', () => {
+                const title = slide.getAttribute('data-title');
+                const description = slide.getAttribute('data-description');
+                const imageUrl = slide.querySelector('img').src;
+                const shareUrl = encodeURIComponent(window.location.href + `#project-${title}`);
+                const shareTitle = encodeURIComponent(title);
+                const content = `
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/3">
+                            <img src="${imageUrl}" alt="${title}" loading="lazy" class="w-full h-full object-cover rounded-lg border-2 border-blue-600">
+                        </div>
+                        <div class="md:w-2/3">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">${title}</h3>
+                            <p class="text-gray-600 mb-4">${description}</p>
+                            <div class="mt-6 flex gap-4">
+                                <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Batafsil ma'lumot uchun</a>
+                                <button class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 transition" onclick="closeModalFunc()">Yopish</button>
+                                <a href="https://t.me/share/url?url=${shareUrl}&text=${shareTitle}" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition">Telegram'da ulashish</a>
                             </div>
                         </div>
-                    `;
-                    document.body.appendChild(modal);
-                    modal.style.display = 'flex';
-                });
+                    </div>
+                `;
+                openModal(content);
             });
-
-            fetchDrawings();
         });
+
+        // Load drawings on page load
+        document.addEventListener('DOMContentLoaded', loadDrawings);
     </script>
 </body>
 </html>
